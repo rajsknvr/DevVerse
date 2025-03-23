@@ -1,0 +1,26 @@
+{
+  "name": "kubernates",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "pb:gen": "./scripts/gen1.sh user product",
+    "pb:genAllClient": "./scripts/genAllClient.sh user product"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@grpc/grpc-js": "^1.13.1",
+    "@grpc/proto-loader": "^0.7.13",
+    "grpc-tools": "^1.13.0",
+    "grpc_tools_node_protoc_ts": "^5.3.3",
+    "protoc-gen-ts": "^0.8.7",
+    "ts-node": "^10.9.2",
+    "ts-proto": "^2.6.1",
+    "typescript": "^5.8.2"
+  },
+  "dependencies": {
+    "@protobuf-ts/plugin": "^2.9.6",
+    "ts-protoc-gen": "^0.15.0"
+  }
+}

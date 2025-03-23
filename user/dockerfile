@@ -1,0 +1,18 @@
+# Base image
+FROM node:20
+
+# Set working directory
+WORKDIR /app
+
+# Copy package files and install dependencies with Yarn
+COPY package*.json ./
+RUN yarn install
+
+# Copy the rest of the application
+COPY . .
+
+# Expose the updated port
+EXPOSE 5002
+
+# Command to start the application
+CMD ["node", "index.js"]
