@@ -13,14 +13,21 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: product-service
+                name: product
                 port:
                   number: 80
           - path: /users
             pathType: Prefix
             backend:
               service:
-                name: user-service
+                name: user
+                port:
+                  number: 80
+          - path: /graphql
+            pathType: Prefix
+            backend:
+              service:
+                name: backend
                 port:
                   number: 80
           - path: /

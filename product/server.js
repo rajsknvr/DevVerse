@@ -27,7 +27,7 @@ fastify.get('/products', async (request, reply) => {
 });
 
 // gRPC Setup
-const packageDefinition = protoLoader.loadSync('../protos/product.proto', {
+const packageDefinition = protoLoader.loadSync('./protos/product.proto', {
   keepCase: true,
   longs: String,
   enums: String,

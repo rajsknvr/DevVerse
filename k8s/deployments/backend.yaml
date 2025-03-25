@@ -1,26 +1,25 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: product
+  name: backend
   namespace: default
   labels:
-    app: product
+    app: backend
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: product
+      app: backend
   template:
     metadata:
       labels:
-        app: product
+        app: backend
     spec:
       containers:
-        - name: product
-          image: product:5.0
+        - name: backend
+          image: backend:5.1
           ports:
-            - containerPort: 5001
-            - containerPort: 6001
+            - containerPort: 4001
           env:
             - name: NODE_ENV
               value: "production"
@@ -36,19 +35,13 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: product
+  name: backend
   namespace: default
 spec:
   type: ClusterIP
   selector:
-    app: product
+    app: backend
   ports:
-    - name: http
-      protocol: TCP
-      port: 80      # Service port (internal)
-      targetPort: 5001 # Connects to Pod's HTTP port
-    - name: rpc
-      protocol: TCP
-      port: 6001      # Service port (internal)
-      targetPort: 6001 # Connects to Pod's RPC port
-
+    - protocol: TCP
+      port: 80
+      targetPort: 4001

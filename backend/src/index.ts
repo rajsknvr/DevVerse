@@ -8,8 +8,8 @@ import { AllProductRequest, ProductRequest, ProductResponse } from './proto/prod
 import { AllUserRequest, UserRequest, UserResponse } from './proto/user/user_pb';
 
 
-const addressProduct = 'localhost:6001'; 
-const addressUser = 'localhost:6002'; 
+const addressProduct = 'product.default.svc.cluster.local:6001';  // can try with product:6001
+const addressUser = 'user.default.svc.cluster.local:6002';  // can try with user:6002
 const credentials = grpc.credentials.createInsecure(); 
 
 
@@ -163,6 +163,33 @@ const server = new ApolloServer({
 });
 
 const fastifyApp = fastify();
+
+
+
+fastifyApp.get('/api/products', async (_, reply) => {
+  try {
+    const request = new AllProductRequest();
+    const response = await new Promise<ProductResponse[]>((resolve, reject) => {
+      productClient.getAllProducts(request, (error:any, response) => {
+        if (error || !response) {
+          reject(new Error(`Error fetching all products: ${error.message}`));
+        } else {
+          resolve(response.getProductsList());
+        }
+      });
+    });
+
+    reply.send(
+      response.map(product => ({
+        id: product.getId(),
+        name: product.getName(),
+        price: product.getPrice(),
+      }))
+    );
+  } catch (error:any) {
+    reply.status(500).send({ error: error.message });
+  }
+});
 
 async function startServer() {
   await server.start();

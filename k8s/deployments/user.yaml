@@ -1,40 +1,54 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: user-service
+  name: user
   namespace: default
   labels:
-    app: user-service
+    app: user
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: user-service
+      app: user
   template:
     metadata:
       labels:
-        app: user-service
+        app: user
     spec:
       containers:
-        - name: user-service
-          image: user:3.2
+        - name: user
+          image: user:5.0
           ports:
             - containerPort: 5002
+            - containerPort: 6002
           env:
             - name: NODE_ENV
               value: "production"
+          resources:
+            requests:
+              cpu: "250m"   # Request 250 millicores (0.25 vCPU)
+              memory: "256Mi"  # Request 256MB RAM
+            limits:
+              cpu: "500m"   # Limit to 500 millicores (0.5 vCPU)
+              memory: "512Mi"  # Limit to 512MB RAM
 
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: user-service
+  name: user
   namespace: default
 spec:
   type: ClusterIP
   selector:
-    app: user-service
+    app: user
   ports:
-    - protocol: TCP
-      port: 80
-      targetPort: 5002
+    - name: http
+      protocol: TCP
+      port: 80      # Service port (internal)
+      targetPort: 5002 # Connects to Pod's HTTP port
+    - name: rpc
+      protocol: TCP
+      port: 6002      # Service port (internal)
+      targetPort: 6002 # Connects to Pod's RPC port
+

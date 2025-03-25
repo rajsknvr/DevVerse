@@ -12,7 +12,7 @@ RUN yarn install
 COPY . .
 
 # Expose the updated port
-EXPOSE 5002 6002
+EXPOSE 5001 6001
 
 # Command to start the application
 CMD ["node", "server.js"]

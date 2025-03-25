@@ -6,17 +6,18 @@
         "start": "ts-node src/index.ts"
     },
     "dependencies": {
-    "@grpc/grpc-js": "^1.13.0",
-    "@grpc/proto-loader": "^0.7.13",
-    "@types/node": "^22.13.11",
-    "apollo-server-fastify": "^3.13.0",
-    "fastify": "3",
-    "graphql": "^16.10.0",
-    "protobufjs": "^7.4.0",
-    "ts-node": "^10.9.2",
-    "typescript": "^5.8.2"
+        "@grpc/grpc-js": "^1.13.0",
+        "@grpc/proto-loader": "^0.7.13",
+        "@types/node": "^22.13.11",
+        "apollo-server-fastify": "^3.13.0",
+        "fastify": "3",
+        "google-protobuf": "^3.21.4",
+        "graphql": "^16.10.0",
+        "protobufjs": "^7.4.0",
+        "ts-node": "^10.9.2",
+        "typescript": "^5.8.2"
     },
     "devDependencies": {
-    "ts-proto": "^2.6.1"
+        "ts-proto": "^2.6.1"
     }
 }

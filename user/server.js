@@ -3,7 +3,7 @@ const grpc = require('@grpc/grpc-js');
 const protoLoader = require('@grpc/proto-loader');
 var reflection = require('@grpc/reflection');
 // Load gRPC proto
-const packageDefinition = protoLoader.loadSync('../protos/user.proto');
+const packageDefinition = protoLoader.loadSync('./protos/user.proto');
 const userProto = grpc.loadPackageDefinition(packageDefinition).user;
 
 const users = [
